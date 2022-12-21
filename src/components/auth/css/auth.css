@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.content {
+    padding-inline: 200px;
+    padding-block-start: 50px;
+    padding-block-end: 100px;
+    border: 2px solid #008C95;
+    border-radius: 10px;
+}
+
+.brand img {
+    width: 200px;
+    height: 200px;
+}
+
+.brand p {
+    padding-top: 30px;
+    font-size: 50px;
+    font-family: sans-serif;
+    color: #008C95;
+}
+
+.btn-placement {
+    padding-top: 50px;
+}
+
+.btn-sign {
+    font-size: 24px;
+    background-color: #008C95;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    margin: 100px;
+}
+
+.sign-in-option {
+    text-decoration: none;
+}
+
+.form-sign {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.form-sign label {
+    margin: 20px;
+}
+
+.form-sign input {
+    border: 1px solid #008C95;
+    border-radius: 5px;
+}
+
+.btn-login {
+    border: none;
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 24px;
+    background-color: #008C95;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.already-have {
+    padding-top: 10px;
+}
+
+.login {
+    font-size: 20px;
+    text-decoration: none;
+    color: #008C95;
+}
