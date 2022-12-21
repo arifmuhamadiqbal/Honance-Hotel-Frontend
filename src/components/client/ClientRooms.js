@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./ClientHeader";
 import { Link } from "react-router-dom";
 
@@ -57,7 +56,10 @@ const ClientRooms = () => {
                         <div className="col border-start border-primary px-5">
                             <div className="row border h-50 my-5">
                                 <div className="img-room">
-                                    <img src={`http://localhost:3020/images/${n.room_photo}`} alt="room-image" />
+                                    <img
+                                        src={`http://localhost:3020/images/${n.room_photo}`}
+                                        alt="room-image"
+                                    />
                                 </div>
                             </div>
                             <div className="row" style={{ height: "140px" }}>
