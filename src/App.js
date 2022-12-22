@@ -36,7 +36,7 @@ function App() {
                 {/* Client */}
                 <Route path="/client" element={<MainPage />} />
                 <Route path="/client-rooms" element={<ClientRooms />} />
-                <Route path="/formbayar" element={<FormPembayaran />} />
+                <Route path="/formbayar/:id_room" element={<FormPembayaran />} />
             </Routes>
         </BrowserRouter>
     );
