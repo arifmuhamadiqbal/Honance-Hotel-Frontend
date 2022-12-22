@@ -25,6 +25,7 @@ const Rooms = () => {
     const getRooms = async () => {
         let response = await axios.get("http://localhost:3020/rooms");
         setRooms(response.data);
+        //console.log(response.data);
     };
 
     // delete room by Id
@@ -36,6 +37,8 @@ const Rooms = () => {
             navigate("/rooms");
         });
     }
+    console.log("ini data kamar");
+    console.log(rooms);
 
     return (
         <>
@@ -119,15 +122,19 @@ const Rooms = () => {
                                                     <td>{n.room_name}</td>
                                                     <td>{n.room_description}</td>
                                                     <td>
-                                                        <ul>
-                                                            <li>Wifi</li>
-                                                            <li>TV</li>
-                                                            <li>AC</li>
-                                                        </ul>
+
+                                                        {n.facilities.map((f) => {
+                                                            return(
+                                                            <ul key={f}>
+                                                                <li>{f.name_facilities}</li>
+                                                            </ul>
+                                                            )
+                                                        })}
+
                                                     </td>
                                                     <td>{n.room_price}</td>
                                                     <td>
-                                                        <img style={{width: "300px", height: "200px"}} src={`http://localhost:3020/images/${n.room_photo}`} alt="foto kamar" />
+                                                        <img style={{ width: "300px", height: "200px" }} src={`http://localhost:3020/images/${n.room_photo}`} alt="foto kamar" />
                                                     </td>
                                                     <td>
                                                         <center>
