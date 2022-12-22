@@ -69,7 +69,7 @@ const ClientRooms = () => {
                                 <div className="row">
                                     <div className="col d-flex justify-content-end my-4">
                                         <Link
-                                            to={`/formbayar/${n.id_room}`}
+                                            to={`/formbook/${n.id_room}`}
                                             className="col-5 btn btn-primary fw-bolder py-2"
                                         >
                                             Book Now

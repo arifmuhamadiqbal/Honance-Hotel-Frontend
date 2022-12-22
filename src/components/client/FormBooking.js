@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "./ClientHeader";
 
-const FormPembayaran = () => {
+const FormBooking = () => {
     const [usernameForm, setUsernameForm] = useState();
     const [emailForm, setEmailForm] = useState();
     const [noHpForm, setNoHpForm] = useState();
     const [checkinForm, setCheckinForm] = useState();
     const [checkoutForm, setCheckoutForm] = useState();
 
-    const book = () => {
+    const pesan = (e) => {
+        e.preventDefault;
         axios
             .post("http://localhost:3020/book", {
                 username: usernameForm,
@@ -134,6 +135,7 @@ const FormPembayaran = () => {
                                 <button
                                     type="submit"
                                     className="btn btn-primary py-3 fw-bolder"
+                                    onClick={pesan}
                                 >
                                     Bayar Sekarang
                                 </button>
@@ -146,4 +148,4 @@ const FormPembayaran = () => {
     );
 };
 
-export default FormPembayaran;
+export default FormBooking;

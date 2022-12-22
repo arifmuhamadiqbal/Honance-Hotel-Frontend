@@ -8,13 +8,12 @@ import Rooms from "./components/admin/Rooms.js";
 import FormTambah from "./components/admin/FormTambah.js";
 import FormUpdate from "./components/admin/FormUpdate.js";
 
-
 // import page authentication
 import Login from "./components/auth/Login.js";
 import Register from "./components/auth/Register.js";
 
 // import page client
-import FormPembayaran from "./components/client/FormPembayaran.js";
+import FormBooking from "./components/client/FormBooking.js";
 import MainPage from "./components/client/MainPage.js";
 import ClientRooms from "./components/client/ClientRooms.js";
 
@@ -36,7 +35,7 @@ function App() {
                 {/* Client */}
                 <Route path="/client" element={<MainPage />} />
                 <Route path="/client-rooms" element={<ClientRooms />} />
-                <Route path="/formbayar" element={<FormPembayaran />} />
+                <Route path="/formbook" element={<FormBooking />} />
             </Routes>
         </BrowserRouter>
     );
