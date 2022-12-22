@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,6 +14,8 @@ import {
 
 const Rooms = () => {
     const [rooms, setRooms] = useState([]);
+    const [roomDelete, setRoomDelete] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getRooms();
@@ -24,13 +26,13 @@ const Rooms = () => {
         setRooms(response.data);
     };
 
-    const deleteRoom = async (id_room) => {
-        try {
-            await axios.delete(`http://localhost:3020/delete/${id_room}`);
-            getRooms();
-        } catch (error) {
-            console.log(error.message);
-        }
+    const deleteRoom = (e) => {
+        console.log(roomDelete);
+        axios.post("http://localhost:3020/delete", {
+            id_room: roomDelete,
+        }).then(() => {
+            navigate("/rooms");
+        });
     }
 
     return (
@@ -115,7 +117,7 @@ const Rooms = () => {
                                                     <td>{n.room_description}</td>
                                                     <td>{n.room_price}</td>
                                                     <td>
-                                                        <img src={`http://localhost:3020/images/${n.room_photo}`}/>
+                                                        <img src={`http://localhost:3020/images/${n.room_photo}`} alt="foto kamar" />
                                                     </td>
                                                     <td>
                                                         <center>
@@ -125,12 +127,7 @@ const Rooms = () => {
                                                             >
                                                                 Update
                                                             </Link>
-                                                            <Link
-                                                                to={`/delete/${n.id}`}
-                                                                className="btn btn-danger fw-bold px-4 ms-3"
-                                                            >
-                                                                Delete
-                                                            </Link>
+                                                            <button onClick={(e) => deleteRoom(setRoomDelete(n.id_room))} className="btn btn-danger fw-bold px-4 ms-3">Delete</button>
                                                         </center>
                                                     </td>
                                                 </tr>

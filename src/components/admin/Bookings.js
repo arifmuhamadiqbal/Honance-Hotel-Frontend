@@ -91,9 +91,9 @@ const Bookings = () => {
                                                     <td>{n.user_name}</td>
                                                     <td>{n.user_email}</td>
                                                     <td>{n.user_phone}</td>
-                                                    <td>{n.date_in.slice(0,10)}</td>
-                                                    <td>{n.date_out.slice(0,10)}</td>
-                                                    <td>{n.total}</td>
+                                                    <td>{n.date_in}</td>
+                                                    <td>{n.date_out}</td>
+                                                    <td>Rp {n.total}</td>
                                                 </tr>
                                             ))}
                                         </tbody>

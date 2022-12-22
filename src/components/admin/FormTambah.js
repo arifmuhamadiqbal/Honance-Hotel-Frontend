@@ -52,7 +52,8 @@ const FormTambah = () => {
       <div className="row">
         <div className="col-md-7">
           <form className="space-y-6"
-            onSubmit={(event) => {
+            onSubmit={(e) => {
+              e.preventDefault();
               const formData = new FormData();
               formData.append("kodeKamar", kodeKamar);
               formData.append("namaKamar", namaKamar);
@@ -60,6 +61,7 @@ const FormTambah = () => {
               formData.append("hargaKamar", hargaKamar);
               formData.append("filename", namaFile);
               formData.append("file", file);
+              console.log(kodeKamar);
               try {
                 axios.post("http://localhost:3020/addRoom", formData)
                   .then((data) => {
@@ -68,53 +70,48 @@ const FormTambah = () => {
               } catch (error) {
                 console.log(error.message);
               }
+              navigate("/rooms");
             }}
-          />
+          >
           <div>
             <label>Room Code</label>
             <input
             type="text"
-            name="kodeKamar" 
-            value={kodeKamar}
               onChange={(e) => {
                 setKodeKamar(e.target.value);
               }} />
             <label>Room Name</label>
             <input
-            type="text" 
-            name="namaKamar"
-            value={namaKamar}
+            type="text"
               onChange={(e) => {
                 setNamaKamar(e.target.value);
               }} />
             <label>Room Desciption</label>
             <input
             type="text"
-            name="deskripsiKamar"
-            value={deskripsiKamar}
               onChange={(e) => {
                 setDeskripsiKamar(e.target.value);
               }} />
             <label>Room Price</label>
             <input
             type="number"
-            name="hargaKamar"
-            value={hargaKamar}
               onChange={(e) => {
                 setHargaKamar(e.target.value);
               }} />
             <label>Rooom Photo</label>
             <input
             type="file"
+            name="file"
               onChange={(e) => {
                 const foto = e.target.files[0]
                 setFile(foto);
                 setNamaFile(foto.name);
               }} />
-          </div>
           <Button type="submit">
             Submit
           </Button>
+          </div>
+          </form>
         </div>
       </div>
     </div>

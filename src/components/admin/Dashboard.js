@@ -9,8 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTachometerAlt, faBookmark, faDoorOpen, faAngleRight, faTable } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
-    const bookingServerHost = "http://localhost:3020/bookings";
-    const roomsServerHost = "http://localhost:3020/rooms";
     const [bookings, setBookings] = useState([]);
     const [rooms, setRooms] = useState([]);
 
@@ -20,14 +18,15 @@ const Dashboard = () => {
     }, []);
 
     const getBookings = async () => {
-        let response = await axios.get(bookingServerHost);
+        let response = await axios.get("http://localhost:3020/bookings");
         setBookings(response.data);
     }
 
     const getRooms = async () => {
-        let response = await axios.get(roomsServerHost);
+        let response = await axios.get("http://localhost:3020/rooms");
         setRooms(response.data);
     }
+
     return (
         <>
             {/* Header */}
@@ -133,9 +132,9 @@ const Dashboard = () => {
                                                     <td>{n.user_name}</td>
                                                     <td>{n.user_email}</td>
                                                     <td>{n.user_phone}</td>
-                                                    <td>{n.date_in.slice(0,10)}</td>
-                                                    <td>{n.date_out.slice(0,10)}</td>
-                                                    <td>{n.total}</td>
+                                                    <td>{n.date_in}</td>
+                                                    <td>{n.date_out}</td>
+                                                    <td>Rp {n.total}</td>
                                                 </tr>
                                             ))}
                                         </tbody>
