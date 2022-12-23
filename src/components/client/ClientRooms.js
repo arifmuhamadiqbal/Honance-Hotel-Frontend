@@ -4,8 +4,8 @@ import Header from "./ClientHeader";
 import { Link } from "react-router-dom";
 
 const ClientRooms = () => {
-    /* const roomsServerHost = "http://localhost:3020/rooms"; */
     const [rooms, setRooms] = useState([]);
+    const [selectedRoom, setSelectedRoom] = useState();
 
     useEffect(() => {
         getRooms();
