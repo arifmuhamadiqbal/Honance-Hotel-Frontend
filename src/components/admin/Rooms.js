@@ -2,43 +2,36 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Link, useNavigate } from "react-router-dom";
-import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Button, Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faTachometerAlt,
-    faBookmark,
-    faDoorOpen,
-    faTable,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTachometerAlt, faBookmark, faDoorOpen, faTable } from "@fortawesome/free-solid-svg-icons";
 
 const Rooms = () => {
+    // state initiation
     const [rooms, setRooms] = useState([]);
-    const [roomDelete, setRoomDelete] = useState();
-    const navigate = useNavigate();
 
+    // use effect
     useEffect(() => {
         getRooms();
     }, []);
 
-    // get all rooms
+    // get all rooms data
     const getRooms = async () => {
         let response = await axios.get("http://localhost:3020/rooms");
         setRooms(response.data);
-        //console.log(response.data);
+        console.log(response.data);
     };
 
-    // delete room by Id
-    const deleteRoom = (e) => {
-        console.log(roomDelete);
-        axios.post("http://localhost:3020/delete", {
-            id_room: roomDelete,
-        }).then(() => {
-            navigate("/rooms");
-        });
-    }
-    console.log("ini data kamar");
-    console.log(rooms);
+    // delete room by id
+    const deleteRoom = async (id_room) => {
+        try {
+          await axios.delete(`http://localhost:3020/rooms/delete/${id_room}`);
+          getRooms();
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     return (
         <>
@@ -84,26 +77,27 @@ const Rooms = () => {
                 <div id="layoutSidenav_content">
                     <main>
                         <div className="container-fluid px-4">
-                            <h1 className="mt-4">Rooms</h1>
-                            <ol className="breadcrumb mb-4">
-                                <li className="breadcrumb-item active">
-                                    Rooms
-                                </li>
-                            </ol>
+                            <h1 className="mt-4 mb-4 text-info"><FontAwesomeIcon icon={faDoorOpen} /> Rooms</h1>
                             <div className="card mb-4">
-                                <div className="card-header">
+                                <div className="card-header py-3">
                                     <FontAwesomeIcon icon={faTable} /> All Rooms
                                     <Link
-                                        to={"/formtambah"}
-                                        className="btn btn-info px-4 ms-3 fw-bold text-white"
+                                        to={"/rooms/addroom"}
+                                        className="btn btn-primary px-2 ms-3 text-white"
                                     >
-                                        Add
+                                        Add Room
+                                    </Link>
+                                    <Link
+                                        to={"/rooms/addfacilities"}
+                                        className="btn btn-secondary px-2 ms-3 text-white"
+                                    >
+                                        Add Facilities
                                     </Link>
                                 </div>
-                                <div className="card-body">
-                                    <Table striped bordered>
+                                <div>
+                                    <Table striped bordered className="table-sm">
                                         <thead>
-                                            <tr>
+                                            <tr className="text-center">
                                                 <th>No.</th>
                                                 <th>Room Code</th>
                                                 <th>Room Name</th>
@@ -114,37 +108,31 @@ const Rooms = () => {
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            {rooms.map((n, key) => (
-                                                <tr key={key}>
-                                                    <td>{n.id_room}</td>
-                                                    <td>{n.room_code}</td>
-                                                    <td>{n.room_name}</td>
-                                                    <td>{n.room_description}</td>
+                                        <tbody className="small">
+                                            {rooms.map((rooms) => (
+                                                <tr key={rooms.id_room}>
+                                                    <td>{rooms.id_room}</td>
+                                                    <td>{rooms.room_code}</td>
+                                                    <td>{rooms.room_name}</td>
+                                                    <td>{rooms.room_description}</td>
                                                     <td>
-
-                                                        {n.facilities.map((f) => {
-                                                            return(
-                                                            <ul key={f}>
-                                                                <li>{f.name_facilities}</li>
-                                                            </ul>
+                                                        {rooms.facilities.map((f) => {
+                                                            return (
+                                                                <ul key={f} className="mb-2">
+                                                                    <li>{f.name_facilities}</li>
+                                                                </ul>
                                                             )
                                                         })}
 
                                                     </td>
-                                                    <td>{n.room_price}</td>
+                                                    <td>Rp {rooms.room_price}</td>
                                                     <td>
-                                                        <img style={{ width: "300px", height: "200px" }} src={`http://localhost:3020/images/${n.room_photo}`} alt="foto kamar" />
+                                                        <img style={{ width: "200px", height: "100px" }} src={`http://localhost:3020/images/${rooms.room_photo}`} alt="foto kamar" />
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <Link
-                                                                to={`/formupdate/${n.id}`}
-                                                                className="btn btn-success fw-bold px-4 ms-3"
-                                                            >
-                                                                Update
-                                                            </Link>
-                                                            <button onClick={(e) => deleteRoom(setRoomDelete(n.id_room))} className="btn btn-danger fw-bold px-4 ms-3">Delete</button>
+                                                            <Link className="btn btn-success px-2 ms-2 mb-2 mt-2" to={`/rooms/update/${rooms.id_room}`}>Update</Link>
+                                                            <Button className="btn btn-danger px-2 ms-2 mb-2 mt-2" onClick={() => deleteRoom(rooms.id_room)}>Delete</Button>
                                                         </center>
                                                     </td>
                                                 </tr>

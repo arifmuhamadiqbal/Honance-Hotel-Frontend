@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 const FormTambah = () => {
+  // state initiation
   const [facilities, setFacilities] = useState([]);
   const [kodeKamar, setKodeKamar] = useState("");
   const [namaKamar, setNamaKamar] = useState("");
@@ -13,18 +14,22 @@ const FormTambah = () => {
   const [namaFile, setNamaFile] = useState("");
   const [file, setFile] = useState();
   const [preview, setPreview] = useState();
+  // end of state initiation
+
   const navigate = useNavigate();
 
   useEffect(() => {
     getFacilities();
   }, []);
 
+  // get facilities from database through backend
   const getFacilities = async () => {
     let response = await axios.get("http://localhost:3020/facilities");
     console.log(response.data);
     setFacilities(response.data);
   }
 
+  // value from checked checkbox and put into state fasilitasKamar
   const handleChecked = (e) => {
     // to get the checked value
     // const checkedValue = e.target.value;
@@ -68,6 +73,7 @@ const FormTambah = () => {
               <label>Room Code</label>
               <input
                 className="form-control"
+                placeholder="input room code"
                 type="text"
                 onChange={(e) => {
                   setKodeKamar(e.target.value);
@@ -75,13 +81,15 @@ const FormTambah = () => {
               <label>Room Name</label>
               <input
                 className="form-control"
+                placeholder="input room name"
                 type="text"
                 onChange={(e) => {
                   setNamaKamar(e.target.value);
                 }} />
               <label>Room Desciption</label>
               <input
-                className="form-control "
+                className="form-control"
+                placeholder="input room description"
                 type="text"
                 onChange={(e) => {
                   setDeskripsiKamar(e.target.value);
@@ -104,6 +112,7 @@ const FormTambah = () => {
               <label>Room Price</label>
               <input
                 className="form-control"
+                placeholder="input room price"
                 type="number"
                 onChange={(e) => {
                   setHargaKamar(e.target.value);
@@ -122,12 +131,12 @@ const FormTambah = () => {
               <br />
               {preview ? (
                 <img className="mb-3"
-                  style={{ width: "250px", height: "150px" }}
+                  style={{ width: "200px", height: "100px" }}
                   src={preview} alt="preview"
                 />) : ("")}
-              <Button className="mb-3" type="submit">
-                Submit
-              </Button>
+                <br/>
+              <Link className="btn btn-danger px-4 mb-3 mt-4" to={"/rooms"}>Back</Link>
+              <Button className="btn-primary mb-3 mx-2 mt-4" type="submit">Submit</Button>
             </div>
           </form>
         </div>
