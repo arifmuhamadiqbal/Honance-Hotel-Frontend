@@ -9,15 +9,15 @@ import FormTambah from "./components/admin/FormTambah.js";
 import FormUpdate from "./components/admin/FormUpdate.js";
 import FormTambahFasilitas from "./components/admin/FormTambahFasilitas.js";
 
-
 // import page authentication
 import Login from "./components/auth/Login.js";
 import Register from "./components/auth/Register.js";
 
 // import page client
-import FormPembayaran from "./components/client/FormPembayaran.js";
+import FormBooking from "./components/client/FormBooking.js";
 import MainPage from "./components/client/MainPage.js";
 import ClientRooms from "./components/client/ClientRooms.js";
+import SearchedRooms from "./components/client/SearchedRooms.js";
 
 function App() {
     return (
@@ -38,7 +38,11 @@ function App() {
                 {/* Client */}
                 <Route path="/client" element={<MainPage />} />
                 <Route path="/client-rooms" element={<ClientRooms />} />
-                <Route path="/formbayar/:id_room" element={<FormPembayaran />} />
+                <Route
+                    path="/searched/:range_harga"
+                    element={<SearchedRooms />}
+                />
+                <Route path="/formbook/:id_room" element={<FormBooking />} />
             </Routes>
         </BrowserRouter>
     );
