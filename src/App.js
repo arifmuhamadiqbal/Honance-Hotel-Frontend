@@ -16,6 +16,7 @@ import Register from "./components/auth/Register.js";
 import FormBooking from "./components/client/FormBooking.js";
 import MainPage from "./components/client/MainPage.js";
 import ClientRooms from "./components/client/ClientRooms.js";
+import SearchedRooms from "./components/client/SearchedRooms.js";
 
 function App() {
     return (
@@ -35,7 +36,11 @@ function App() {
                 {/* Client */}
                 <Route path="/client" element={<MainPage />} />
                 <Route path="/client-rooms" element={<ClientRooms />} />
-                <Route path="/formbook" element={<FormBooking />} />
+                <Route
+                    path="/searched/:range_harga"
+                    element={<SearchedRooms />}
+                />
+                <Route path="/formbook/:id_room" element={<FormBooking />} />
             </Routes>
         </BrowserRouter>
     );

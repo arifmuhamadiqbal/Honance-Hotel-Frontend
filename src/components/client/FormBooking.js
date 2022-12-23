@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "./ClientHeader";
 
 const FormBooking = () => {
-    const [usernameForm, setUsernameForm] = useState();
-    const [emailForm, setEmailForm] = useState();
-    const [noHpForm, setNoHpForm] = useState();
-    const [checkinForm, setCheckinForm] = useState();
-    const [checkoutForm, setCheckoutForm] = useState();
+    const [room, setRoom] = useState([]);
+    const [usernameForm, setUsernameForm] = useState("");
+    const [emailForm, setEmailForm] = useState("");
+    const [noHpForm, setNoHpForm] = useState("");
+    const [checkinForm, setCheckinForm] = useState("");
+    const [checkoutForm, setCheckoutForm] = useState("");
 
-    const pesan = (e) => {
-        e.preventDefault;
-        axios
-            .post("http://localhost:3020/book", {
-                username: usernameForm,
-                email: emailForm,
-                nohp: noHpForm,
-                checkin: checkinForm,
-                checkout: checkoutForm,
-            })
-            .then((res) => {
-                console.log(res);
-            });
+    const roomID = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        getRoomByID();
+    }, []);
+
+    const getRoomByID = async (req, res) => {
+        let response = await axios.get(
+            `http://localhost:3020/roomid/${roomID.id_room}`
+        );
+        console.log(response.data);
+        setRoom(response.data);
     };
 
     return (
@@ -32,7 +34,30 @@ const FormBooking = () => {
                     <h2 className="fw-bolder">Formulir Reservasi</h2>
                 </div>
                 <div className="container align-self-center border border-primary rounded p-5">
-                    <form onSubmit={book} className="d-flex flex-row">
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            try {
+                                axios
+                                    .post("http://localhost:3020/book", {
+                                        idroom: roomID.id_room,
+                                        username: usernameForm,
+                                        email: emailForm,
+                                        nohp: noHpForm,
+                                        checkin: checkinForm,
+                                        checkout: checkoutForm,
+                                        total: room.room_price,
+                                    })
+                                    .then((data) => {
+                                        console.log(data);
+                                    });
+                            } catch (error) {
+                                console.log(error.message);
+                            }
+                            navigate("/client");
+                        }}
+                        className="d-flex flex-row"
+                    >
                         <div className="col">
                             <div className="row mb-3">
                                 <div className="col-8">
@@ -47,6 +72,7 @@ const FormBooking = () => {
                                         name="username"
                                         id="username"
                                         className="form-control rounded-end border-1 border-primary"
+                                        value={usernameForm}
                                         onChange={(e) => {
                                             setUsernameForm(e.target.value);
                                         }}
@@ -126,16 +152,15 @@ const FormBooking = () => {
                         </div>
                         <div className="col-4 d-flex flex-column align-self-end mx-5 my-2">
                             <div className="row">
-                                <h4>Deluxe Room</h4>
+                                <h4>{room.room_name}</h4>
                             </div>
                             <div className="row my-4">
-                                <h1 className="fw-bold">Rp.</h1>
+                                <h1 className="fw-bold">{room.room_price}</h1>
                             </div>
                             <div className="row">
                                 <button
                                     type="submit"
                                     className="btn btn-primary py-3 fw-bolder"
-                                    onClick={pesan}
                                 >
                                     Bayar Sekarang
                                 </button>

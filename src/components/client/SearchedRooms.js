@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./ClientHeader";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const ClientRooms = () => {
-    /* const roomsServerHost = "http://localhost:3020/rooms"; */
     const [rooms, setRooms] = useState([]);
 
+    const param = useParams();
+    console.log(param);
+
     useEffect(() => {
-        getRooms();
+        searchRoom();
     }, []);
 
-    const getRooms = async () => {
-        let response = await axios.get("http://localhost:3020/rooms");
+    const searchRoom = async (req, res) => {
+        let response = await axios.get(
+            `http://localhost:3020/search/${param.range_harga}`
+        );
+        console.log(response.data);
         setRooms(response.data);
     };
 
@@ -69,7 +74,7 @@ const ClientRooms = () => {
                                 <div className="row">
                                     <div className="col d-flex justify-content-end my-4">
                                         <Link
-                                            to={`/formbayar/${n.id_room}`}
+                                            to={`/formbook/${n.id_room}`}
                                             className="col-5 btn btn-primary fw-bolder py-2"
                                         >
                                             Book Now
