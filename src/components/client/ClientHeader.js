@@ -24,7 +24,7 @@ class Header extends React.Component {
                                 to={"/client-rooms"}
                                 class="nav-link text-light"
                             >
-                                Daftar Hotel
+                                Daftar Kamar
                             </Link>
                         </li>
                     </ul>

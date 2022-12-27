@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+<<<<<<< HEAD
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
@@ -8,6 +9,12 @@ const FormTambah = () => {
   const idBaru = parseInt(kamarBaru) + 1;
   console.log(idBaru);
   
+=======
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+
+const FormTambah = () => {
+>>>>>>> bdb18d9bab1552c13062046874be87753377830e
   // state initiation
   const [facilities, setFacilities] = useState([]);
   const [kodeKamar, setKodeKamar] = useState("");
@@ -33,6 +40,7 @@ const FormTambah = () => {
     setFacilities(response.data);
   }
 
+<<<<<<< HEAD
   // get value from checked checkbox and put into state fasilitasKamar
   const handleChecked = e => {
     if (e.target.checked === true) {
@@ -47,6 +55,21 @@ const FormTambah = () => {
       console.log(fasilitasKamar);
     }
   };
+=======
+  // value from checked checkbox and put into state fasilitasKamar
+  const handleChecked = (e) => {
+    // to get the checked value
+    // const checkedValue = e.target.value;
+    // console.log(checkedValue);
+
+    // to get the checked name
+    const checkedName = e.target.name;
+    // console.log(checkedName);
+
+    setFasilitasKamar(checkedName);
+    console.log(fasilitasKamar);
+  }
+>>>>>>> bdb18d9bab1552c13062046874be87753377830e
 
   return (
     <div className="container-fluid d-flex justify-content-center mt-5">
@@ -148,14 +171,16 @@ const FormTambah = () => {
                   src={preview} alt="preview"
                 />) : ("")}
                 <br/>
+<<<<<<< HEAD
               <Link className="btn btn-warning px-4 mb-3 mt-4" to={"/rooms"}>Back</Link>
+=======
+              <Link className="btn btn-danger px-4 mb-3 mt-4" to={"/rooms"}>Back</Link>
+>>>>>>> bdb18d9bab1552c13062046874be87753377830e
               <Button className="btn-primary mb-3 mx-2 mt-4" type="submit">Submit</Button>
             </div>
           </form>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default FormTambah;

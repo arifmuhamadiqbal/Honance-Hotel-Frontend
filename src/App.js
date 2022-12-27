@@ -8,16 +8,20 @@ import Rooms from "./components/admin/Rooms.js";
 import FormTambah from "./components/admin/FormTambah.js";
 import FormUpdate from "./components/admin/FormUpdate.js";
 import FormTambahFasilitas from "./components/admin/FormTambahFasilitas.js";
+<<<<<<< HEAD
 
+=======
+>>>>>>> bdb18d9bab1552c13062046874be87753377830e
 
 // import page authentication
 import Login from "./components/auth/Login.js";
 import Register from "./components/auth/Register.js";
 
 // import page client
-import FormPembayaran from "./components/client/FormPembayaran.js";
+import FormBooking from "./components/client/FormBooking.js";
 import MainPage from "./components/client/MainPage.js";
 import ClientRooms from "./components/client/ClientRooms.js";
+import SearchedRooms from "./components/client/SearchedRooms.js";
 
 function App() {
     return (
@@ -31,14 +35,22 @@ function App() {
                 <Route path="/admin" element={<Dashboard />} />
                 <Route path="/bookings" element={<Bookings />} />
                 <Route path="/rooms" element={<Rooms />} />
+<<<<<<< HEAD
                 <Route path="/rooms/addRoom/:kamarBaru" element={<FormTambah />} />
+=======
+                <Route path="/rooms/addroom" element={<FormTambah />} />
+>>>>>>> bdb18d9bab1552c13062046874be87753377830e
                 <Route path="/rooms/update/:id_room" element={<FormUpdate />} />
                 <Route path="/rooms/addfacilities" element={<FormTambahFasilitas />} />
 
                 {/* Client */}
                 <Route path="/client" element={<MainPage />} />
                 <Route path="/client-rooms" element={<ClientRooms />} />
-                <Route path="/formbayar/:id_room" element={<FormPembayaran />} />
+                <Route
+                    path="/searched/:range_harga"
+                    element={<SearchedRooms />}
+                />
+                <Route path="/formbook/:id_room" element={<FormBooking />} />
             </Routes>
         </BrowserRouter>
     );
