@@ -19,6 +19,7 @@ const Dashboard = () => {
 
     const getBookings = async () => {
         let response = await axios.get("http://localhost:3020/bookings");
+        console.log(response.data);
         setBookings(response.data);
     }
 
@@ -67,14 +68,11 @@ const Dashboard = () => {
                     <main>
                         <div className="container-fluid px-4">
                             {/* Content title */}
-                            <h1 className="mt-4">Dashboard</h1>
-                            <ol className="breadcrumb mb-4">
-                                <li className="breadcrumb-item active">Dashboard</li>
-                            </ol>
+                            <h1 className="mt-4 mb-4 text-primary"><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</h1>
                             <div className="row">
                                 {/* Room types */}
                                 <div className="col-xl-3 col-md-6">
-                                    <div className="card bg-primary text-white mb-4">
+                                    <div className="card bg-info text-white mb-4">
                                         <div className="card-body d-flex align-items-center justify-content-between">
                                             <h3>Room Types</h3>
                                             <h1>

@@ -59,10 +59,7 @@ const Bookings = () => {
                     <main>
                         <div className="container-fluid px-4">
                             {/* Content title */}
-                            <h1 className="mt-4">Bookings</h1>
-                            <ol className="breadcrumb mb-4">
-                                <li className="breadcrumb-item active">Bookings</li>
-                            </ol>
+                            <h1 className="mt-4 mb-4 text-warning"><FontAwesomeIcon icon={faBookmark} /> Bookings</h1>
                             <div className="card mb-4">
                                 <div className="card-header">
                                     <FontAwesomeIcon icon={faTable} /> All Bookings
